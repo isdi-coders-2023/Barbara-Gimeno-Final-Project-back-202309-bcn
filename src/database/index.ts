@@ -1,11 +1,15 @@
 import mongoose from "mongoose";
+import debugCreator from "debug";
+import chalk from "chalk";
+
+export const debug = debugCreator("root:src:database");
 
 export const connectToDatabase = async (mongoUrl: string) => {
   try {
     await mongoose.connect(mongoUrl);
     mongoose.set("debug", true);
-    // Mensaje para cuando se ha conectado 🐼
+    debug(chalk.blueBright("Connected to database"));
   } catch (error) {
-    // Mensaje para cuando no se ha conectado 🐇
+    debug(chalk.redBright("Fail conecction to database"));
   }
 };
