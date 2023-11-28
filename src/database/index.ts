@@ -1,5 +1,6 @@
-import mongoose from "mongoose";
+import "dotenv/config";
 import debugCreator from "debug";
+import mongoose from "mongoose";
 import chalk from "chalk";
 
 export const debug = debugCreator("root:src:database");

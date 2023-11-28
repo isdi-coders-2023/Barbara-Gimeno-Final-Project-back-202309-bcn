@@ -1,7 +1,9 @@
+import "dotenv/config";
 import debugCreator from "debug";
 import chalk from "chalk";
-import { connectToDatabase } from "./database";
-import { startServer } from "./server/app";
+import { connectToDatabase } from "./database/index.js";
+import { startServer } from "./server/app.js";
+import "./server/index.js";
 
 const debug = debugCreator("root:index");
 
