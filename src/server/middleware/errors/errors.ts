@@ -1,5 +1,5 @@
 import { type Response, type NextFunction, type Request } from "express";
-import CustomError from "../CustomError/CustomError";
+import CustomError from "../../../CustomError/CustomError.js";
 import debugCreator from "debug";
 import chalk from "chalk";
 
@@ -17,7 +17,7 @@ export const generalError = (
   _next: NextFunction,
 ) => {
   const statusCode = error.statusCode ?? 500;
-  const privateMessage = error.customMessage ?? error.message;
+  const privateMessage = error.privateMessage ?? error.message;
   debug(chalk.red("Error: ", privateMessage));
 
   res.status(statusCode).json({ error: privateMessage });
