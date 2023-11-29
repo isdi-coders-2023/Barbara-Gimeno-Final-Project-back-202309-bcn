@@ -3,11 +3,10 @@ import express from "express";
 import debugCreator from "debug";
 import chalk from "chalk";
 
-const app = express();
-
 const debug = debugCreator("root:server:app");
 
-app.disabled("x-powered-by");
+const app = express();
+app.disable("x-powered-by");
 
 export const startServer = (port: number) => {
   app.listen(port, () => {
