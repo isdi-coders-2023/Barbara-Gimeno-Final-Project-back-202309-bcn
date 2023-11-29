@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { PingController } from "./pingController";
+import { PingController } from "./PingController";
 
 describe("Given a PingController's getPong method", () => {
   describe("When it receives a response", () => {
@@ -24,7 +24,7 @@ describe("Given a PingController's getPong method", () => {
 
       pingController.getPong(req as Request, res as Response);
 
-      expect(res.status(200).json).toHaveBeenCalledWith(expectedMessage);
+      expect(res.json).toHaveBeenCalledWith(expectedMessage);
     });
   });
 });
