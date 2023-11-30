@@ -42,6 +42,6 @@ const poolSchema = new Schema<PoolStructure>({
   },
 });
 
-const Pool = model("Pool", poolSchema, "pools");
+const Pool = model("Pool", poolSchema, "pool");
 
 export default Pool;
