@@ -5,7 +5,7 @@ import { connectToDatabase } from "./database/index.js";
 import { startServer } from "./server/app.js";
 import "./server/index.js";
 
-const debug = debugCreator("root:index");
+const debug = debugCreator("root:src:index");
 
 const port = process.env.PORT ?? 4000;
 
