@@ -1,10 +1,10 @@
 import { Router } from "express";
-import PoolMongooseRepository from "../repository/PoolMongooseRepository.js";
-import PoolsController from "../controller/PoolController.js";
+import PoolsMongooseRepository from "../repository/PoolsMongooseRepository.js";
+import PoolsController from "../controller/PoolsController.js";
 
 const poolsRouter = Router();
 
-const poolRepository = new PoolMongooseRepository();
+const poolRepository = new PoolsMongooseRepository();
 const poolController = new PoolsController(poolRepository);
 
 poolsRouter.get("/", poolController.getPools);

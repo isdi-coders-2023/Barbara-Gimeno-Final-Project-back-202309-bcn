@@ -1,0 +1,62 @@
+{
+  "info": {
+    "_postman_id": "5ce8c18f-8e7f-4c42-ad88-7af75a2c2a2f",
+    "name": "Poolisher",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "30606365"
+  },
+  "item": [
+    {
+      "name": "ping",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:4000",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4000"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "notFound",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:4000/p",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4000",
+          "path": ["p"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "pools",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:4000/pools",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4000",
+          "path": ["pools"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "generalError",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    }
+  ]
+}
