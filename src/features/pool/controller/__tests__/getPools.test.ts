@@ -1,14 +1,14 @@
 import type { Request, Response } from "express";
 import poolsMock from "../../mooks/poolsMock";
-import type { PoolRepositoryStructure } from "../../repository/typesRepository";
-import PoolsController from "../PoolController";
+import type { PoolsRepositoryStructure } from "../../repository/typesRepository";
+import PoolsController from "../PoolsController";
 
 beforeEach(() => {
   jest.restoreAllMocks();
 });
 
 describe("Given a PoolController's getPools method", () => {
-  const poolsRepository: Pick<PoolRepositoryStructure, "getPools"> = {
+  const poolsRepository: Pick<PoolsRepositoryStructure, "getPools"> = {
     getPools: jest.fn().mockResolvedValue(poolsMock),
   };
 
