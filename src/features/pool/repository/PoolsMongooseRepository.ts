@@ -1,14 +1,15 @@
 import Pool from "../model/Pool.js";
 import { type PoolStructure } from "../types.js";
-import { type PoolRepositoryStructure } from "./typesRepository.js";
+import { type PoolsRepositoryStructure } from "./typesRepository.js";
 
-const limit = 10;
-class PoolMongooseRepository implements PoolRepositoryStructure {
+class PoolsMongooseRepository implements PoolsRepositoryStructure {
   public getPools = async (): Promise<PoolStructure[]> => {
+    const limit = 10;
+
     const pools = await Pool.find().limit(limit);
 
     return pools;
   };
 }
 
-export default PoolMongooseRepository;
+export default PoolsMongooseRepository;
