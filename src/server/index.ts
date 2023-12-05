@@ -14,11 +14,10 @@ const allowedOptions = [
 const options: cors.CorsOptions = {
   origin: allowedOptions,
 };
+app.use(cors(options));
 
 app.use(morgan("dev"));
 app.use(express.json());
-
-app.use(cors(options));
 
 app.get("/", pingRouter);
 app.use("/pools", poolsRouter);
