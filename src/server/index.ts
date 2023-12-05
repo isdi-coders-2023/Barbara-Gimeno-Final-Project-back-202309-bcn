@@ -7,15 +7,13 @@ import pingRouter from "../features/ping/router/pingRouter.js";
 import { generalError, notFound } from "./middleware/errors/errors.js";
 import poolsRouter from "../features/pool/router/poolsRouter.js";
 
-const allowedOptions = [
-  "https://barbara-gimeno-202309-bcn-front.netlify.app",
-  "http://localhost:5713",
-];
+const allowedOptions = [process.env.NETLIFY_URL!, process.env.LOCAL!];
+
 const options: cors.CorsOptions = {
   origin: allowedOptions,
 };
-app.use(cors(options));
 
+app.use(cors(options));
 app.use(morgan("dev"));
 app.use(express.json());
 
