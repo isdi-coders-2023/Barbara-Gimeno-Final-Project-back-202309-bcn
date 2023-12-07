@@ -8,8 +8,9 @@ beforeEach(() => {
 });
 
 describe("Given a PoolController's getPools method", () => {
-  const poolsRepository: Pick<PoolsRepositoryStructure, "getPools"> = {
+  const poolsRepository: PoolsRepositoryStructure = {
     getPools: jest.fn().mockResolvedValue(poolsMock),
+    deletePool: jest.fn().mockResolvedValue(poolsMock),
   };
 
   const poolsController = new PoolsController(poolsRepository);
