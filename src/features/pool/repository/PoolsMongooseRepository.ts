@@ -10,6 +10,14 @@ class PoolsMongooseRepository implements PoolsRepositoryStructure {
 
     return pools;
   };
+
+  async deletePool(poolId: string): Promise<void> {
+    try {
+      await Pool.findByIdAndDelete(poolId);
+    } catch (error) {
+      throw new Error("Error deleting the pool" + (error as Error).message);
+    }
+  }
 }
 
 export default PoolsMongooseRepository;

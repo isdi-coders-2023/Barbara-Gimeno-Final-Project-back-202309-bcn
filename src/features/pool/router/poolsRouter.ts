@@ -8,5 +8,6 @@ const poolRepository = new PoolsMongooseRepository();
 const poolController = new PoolsController(poolRepository);
 
 poolsRouter.get("/", poolController.getPools);
+poolsRouter.delete("/:poolId", poolController.deletePool);
 
 export default poolsRouter;
