@@ -9,5 +9,6 @@ const poolController = new PoolsController(poolRepository);
 
 poolsRouter.get("/", poolController.getPools);
 poolsRouter.delete("/:poolId", poolController.deletePool);
+poolsRouter.post("/create", poolController.addPool);
 
 export default poolsRouter;

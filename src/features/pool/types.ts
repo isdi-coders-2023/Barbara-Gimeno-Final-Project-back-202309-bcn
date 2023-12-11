@@ -1,3 +1,5 @@
+import { type Request } from "express";
+
 export interface PoolDataStructure {
   title: string;
   measuresLong: number;
@@ -12,3 +14,9 @@ export interface PoolDataStructure {
 export interface PoolStructure extends PoolDataStructure {
   _id: string;
 }
+
+export type PoolRequestWithoutId = Request<
+  Record<string, unknown>,
+  Record<string, unknown>,
+  PoolDataStructure
+>;

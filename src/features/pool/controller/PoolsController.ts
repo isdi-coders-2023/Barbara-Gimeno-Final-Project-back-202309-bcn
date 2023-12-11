@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
 import { type PoolsRepositoryStructure } from "../repository/typesRepository.js";
 import CustomError from "../../../CustomError/CustomError.js";
-import { type PoolRequestWithoutId, type PoolDataStructure } from "../types.js";
+import { type PoolRequestWithoutId } from "../types.js";
 
 class PoolsController {
   constructor(private readonly poolsRepository: PoolsRepositoryStructure) {}
