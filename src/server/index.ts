@@ -7,15 +7,17 @@ import pingRouter from "../features/ping/router/pingRouter.js";
 import { generalError, notFound } from "./middleware/errors/errors.js";
 import poolsRouter from "../features/pool/router/poolsRouter.js";
 
-const allowedOptions = [process.env.NETLIFY_URL!, process.env.LOCAL!];
+const frontUrl = process.env.NETLIFY_URL!;
 
-const options: cors.CorsOptions = {
-  origin: allowedOptions,
-};
-
-app.use(cors(options));
 app.use(morgan("dev"));
+
 app.use(express.json());
+
+app.use(
+  cors({
+    origin: [frontUrl, "http://localhost:5173", "http://localhost:4000"],
+  }),
+);
 
 app.get("/", pingRouter);
 app.use("/pools", poolsRouter);
