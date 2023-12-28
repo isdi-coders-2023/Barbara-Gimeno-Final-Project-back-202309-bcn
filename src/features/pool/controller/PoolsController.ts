@@ -53,16 +53,14 @@ class PoolsController {
     res: Response,
     next: NextFunction,
   ) => {
-    try {
-      const { poolId } = req.params;
+    const { poolId } = req.params;
 
+    try {
       const idPool = await this.poolsRepository.getPoolById(poolId)!;
 
-      res.status(200).json(idPool);
-    } catch {
-      const customError = new CustomError("Error finding a pool", 400);
-
-      next(customError);
+      res.status(200).json({ idPool });
+    } catch (error) {
+      next(error);
     }
   };
 }
