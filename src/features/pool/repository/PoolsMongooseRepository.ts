@@ -1,3 +1,4 @@
+import CustomError from "../../../CustomError/CustomError.js";
 import Pool from "../model/Pool.js";
 import { type PoolDataStructure, type PoolStructure } from "../types.js";
 import { type PoolsRepositoryStructure } from "./typesRepository.js";
@@ -26,6 +27,16 @@ class PoolsMongooseRepository implements PoolsRepositoryStructure {
       return newPool;
     } catch (error) {
       throw new Error("Error creating a new pool" + (error as Error).message);
+    }
+  }
+
+  public async getPoolById(id: string): Promise<PoolStructure> {
+    try {
+      const pool = await Pool.findById(id);
+
+      return pool!;
+    } catch (error) {
+      throw new CustomError("Could't find the pool", 404);
     }
   }
 }

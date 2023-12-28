@@ -62,6 +62,7 @@ describe("Given a PoolsController's deletePool method", () => {
         getPools: jest.fn(),
         deletePool: jest.fn().mockRejectedValue(null),
         addPool: jest.fn(),
+        getPoolById: jest.fn(),
       };
 
       const poolsController = new PoolsController(poolsRepository);
