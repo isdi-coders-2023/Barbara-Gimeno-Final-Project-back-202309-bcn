@@ -1,7 +1,5 @@
 import request from "supertest";
 import app from "../../../../server/app";
-import poolsMock from "../../mooks/poolsMock";
-import Pool from "../../model/Pool";
 
 describe("Given a DELETE /pools/:poolId endpoint", () => {
   describe("When it receives a request with an incorrect pool id", () => {

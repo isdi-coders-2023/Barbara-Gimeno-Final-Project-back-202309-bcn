@@ -28,6 +28,16 @@ class PoolsMongooseRepository implements PoolsRepositoryStructure {
       throw new Error("Error creating a new pool" + (error as Error).message);
     }
   }
+
+  public async getPoolById(id: string): Promise<PoolStructure> {
+    try {
+      const pool = await Pool.findById(id);
+
+      return pool!;
+    } catch (error) {
+      throw new Error("Could't find the pool" + (error as Error).message);
+    }
+  }
 }
 
 export default PoolsMongooseRepository;

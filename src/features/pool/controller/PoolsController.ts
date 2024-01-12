@@ -33,6 +33,7 @@ class PoolsController {
     next: NextFunction,
   ) => {
     const pool = req.body;
+
     try {
       const poolWithId = await this.poolsRepository.addPool(pool);
 
@@ -42,6 +43,24 @@ class PoolsController {
       });
     } catch (error) {
       const customError = new CustomError("Error creating a new pool", 400);
+
+      next(customError);
+    }
+  };
+
+  public getPoolById = async (
+    req: Request<{ poolId: string }>,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
+    try {
+      const { poolId } = req.params;
+
+      const idPool = await this.poolsRepository.getPoolById(poolId)!;
+
+      res.status(200).json({ idPool });
+    } catch {
+      const customError = new CustomError("Error finding a pool", 400);
 
       next(customError);
     }

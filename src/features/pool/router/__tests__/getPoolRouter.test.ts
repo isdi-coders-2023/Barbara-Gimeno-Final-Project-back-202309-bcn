@@ -2,7 +2,6 @@ import request from "supertest";
 import app from "../../../../server/app";
 import { type PoolStructure } from "../../types";
 import poolsMock from "../../mooks/poolsMock";
-import Pool from "../../model/Pool";
 
 describe("Given a GET /pool endpoint", () => {
   describe("When it receives a request", () => {
