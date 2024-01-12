@@ -1,4 +1,4 @@
-import { type Response, type Request, type NextFunction } from "express";
+import type { Response, Request, NextFunction } from "express";
 import type PoolsMongooseRepository from "../../repository/PoolsMongooseRepository";
 import poolsIdMock from "../../mooks/poolsIdMock";
 import PoolsController from "../PoolsController";
@@ -12,16 +12,15 @@ beforeEach(() => {
 describe("Given the method getPoolById in PoolsController", () => {
   const res: Pick<Response, "status" | "json"> = {
     status: jest.fn().mockReturnThis(),
-    json: jest.fn(),
+    json: jest.fn().mockReturnThis(),
   };
   const next: NextFunction = jest.fn();
   const poolMock = poolsIdMock;
+  const req: Pick<Request, "params"> = {
+    params: { poolId: "6572edf668fea6caed13b908" },
+  };
 
   describe("When it receives a Request with a valid pool id", () => {
-    const req: Pick<Request, "params"> = {
-      params: { poolId: "6572edf668fea6caed13b908" },
-    };
-
     const poolsRepository: Pick<PoolsMongooseRepository, "getPoolById"> = {
       getPoolById: jest.fn().mockResolvedValue(poolsIdMock),
     };
@@ -41,34 +40,40 @@ describe("Given the method getPoolById in PoolsController", () => {
 
       expect(res.status).toHaveBeenCalledWith(expectedStatusCode);
     });
-  });
 
-  describe("When it receives a Request with an incorrect pool id", () => {
-    test("Then it should call its response's status method with 200 Status Code", async () => {
-      const wrongPoolId = "invalidId";
-      const expectedError: Partial<CustomError> = {
-        message: "Couldn't find the pool",
-        statusCode: 400,
-      };
-      const req: Pick<Request, "params"> = {
-        params: { poolId: wrongPoolId },
-      };
-
-      const poolRepository: Pick<PoolsMongooseRepository, "getPoolById"> = {
-        getPoolById: jest.fn().mockRejectedValue(expectedError),
-      };
-
-      const poolController = new PoolsController(
-        poolRepository as PoolsMongooseRepository,
-      );
-
+    test("Then it should call the responses's json method with the 'beach pool' pool data in the response", async () => {
       await poolController.getPoolById(
         req as PoolRequestById,
         res as Response,
         next,
       );
 
-      expect(next).toHaveBeenCalledWith(expectedError);
+      expect(res.json).toHaveBeenCalledWith({ idPool: poolMock });
+    });
+  });
+
+  describe("When it receives a Request with an incorrect pool id", () => {
+    test("Then it should call its next function with a custom error", async () => {
+      const expectedError: Partial<CustomError> = {
+        message: "Error finding a pool",
+        statusCode: 400,
+      };
+
+      const poolsRepository: Pick<PoolsMongooseRepository, "getPoolById"> = {
+        getPoolById: jest.fn().mockRejectedValue(null),
+      };
+
+      const poolController = new PoolsController(
+        poolsRepository as PoolsMongooseRepository,
+      );
+
+      await poolController.getPoolById(
+        req as Request<{ poolId: string }>,
+        res as Response,
+        next,
+      );
+
+      expect(next).toHaveBeenCalledWith(expect.objectContaining(expectedError));
     });
   });
 });

@@ -36,7 +36,7 @@ class PoolsMongooseRepository implements PoolsRepositoryStructure {
 
       return pool!;
     } catch (error) {
-      throw new CustomError("Could't find the pool", 404);
+      throw new Error("Could't find the pool" + (error as Error).message);
     }
   }
 }
