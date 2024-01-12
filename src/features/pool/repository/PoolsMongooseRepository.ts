@@ -1,4 +1,3 @@
-import CustomError from "../../../CustomError/CustomError.js";
 import Pool from "../model/Pool.js";
 import { type PoolDataStructure, type PoolStructure } from "../types.js";
 import { type PoolsRepositoryStructure } from "./typesRepository.js";
