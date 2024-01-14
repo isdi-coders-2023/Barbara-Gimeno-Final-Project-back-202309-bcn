@@ -11,5 +11,6 @@ poolsRouter.get("/", poolController.getPools);
 poolsRouter.delete("/:poolId", poolController.deletePool);
 poolsRouter.post("/create", poolController.addPool);
 poolsRouter.get("/:poolId", poolController.getPoolById);
+poolsRouter.patch("/:poolId", poolController.modifyPool);
 
 export default poolsRouter;
