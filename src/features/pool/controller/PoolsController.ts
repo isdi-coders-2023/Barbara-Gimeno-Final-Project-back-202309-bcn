@@ -74,7 +74,6 @@ class PoolsController {
     try {
       const pool = req.body;
       const { poolId } = req.params;
-
       const modifiedPool = await this.poolsRepository.modifyPool(poolId, pool);
 
       res.status(200).json({ pool: modifiedPool });

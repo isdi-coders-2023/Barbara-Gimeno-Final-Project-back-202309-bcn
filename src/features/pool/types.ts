@@ -21,4 +21,8 @@ export type PoolRequestWithoutId = Request<
   PoolDataStructure
 >;
 
-export type PoolRequestById = Request<{ poolId: string }>;
+export type PoolRequestById = Request<
+  { poolId: string },
+  Record<string, unknown>,
+  PoolDataStructure
+>;
