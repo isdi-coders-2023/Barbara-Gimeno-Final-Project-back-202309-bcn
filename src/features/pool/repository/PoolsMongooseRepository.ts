@@ -38,6 +38,23 @@ class PoolsMongooseRepository implements PoolsRepositoryStructure {
       throw new Error("Could't find the pool" + (error as Error).message);
     }
   }
+
+  public async modifyPool(
+    id: string,
+    pool: PoolStructure,
+  ): Promise<PoolStructure | undefined> {
+    try {
+      const modifiedPool = await Pool.findByIdAndUpdate(
+        id,
+        { ...pool },
+        { returnDocument: "after" },
+      );
+
+      return modifiedPool!;
+    } catch (error) {
+      throw new Error("Error modifyng the pool" + (error as Error).message);
+    }
+  }
 }
 
 export default PoolsMongooseRepository;
