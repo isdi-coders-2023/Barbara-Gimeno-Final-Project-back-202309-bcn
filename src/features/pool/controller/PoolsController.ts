@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
 import { type PoolsRepositoryStructure } from "../repository/typesRepository.js";
 import CustomError from "../../../CustomError/CustomError.js";
-import { type PoolRequestWithoutId } from "../types.js";
+import { type PoolRequestById, type PoolRequestWithoutId } from "../types.js";
 
 class PoolsController {
   constructor(private readonly poolsRepository: PoolsRepositoryStructure) {}
@@ -61,6 +61,24 @@ class PoolsController {
       res.status(200).json({ idPool });
     } catch {
       const customError = new CustomError("Error finding a pool", 400);
+
+      next(customError);
+    }
+  };
+
+  modifyPool = async (
+    req: PoolRequestById,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
+    try {
+      const pool = req.body;
+      const { poolId } = req.params;
+      const modifiedPool = await this.poolsRepository.modifyPool(poolId, pool);
+
+      res.status(200).json({ pool: modifiedPool });
+    } catch (error) {
+      const customError = new CustomError("Couldn't modify the pool", 400);
 
       next(customError);
     }
